@@ -20,6 +20,9 @@
     }
   </style>
   <script>
+    const window_height = window.innerHeight;
+    const window_width = window.innerWidth;
+
     const plr1 = document.getElementById("player1");
     let x = 100;
     let y = 100;
@@ -63,8 +66,8 @@
         y += dy * speed;
 
         //AVOID PLAYER FROM GOING OFF BOUNDS
-        x = Math.min(x, 850);
-        y = Math.min(y, 800);
+        x = Math.min(x, (window_width-50)/2 - 50);
+        y = Math.min(y, window_height - 50);
 
         x = Math.max(0, x);
         y = Math.max(0, y);
@@ -108,10 +111,10 @@
         }
 
         //AVOID PLAYER FROM GOING OFF BOUNDS
-        x_2 = Math.min(x_2, 1800);
-        y_2 = Math.min(y_2, 800);
+        x_2 = Math.min(x_2, window_width - 50);
+        y_2 = Math.min(y_2, window_height - 50);
 
-        x_2 = Math.max(950, x_2);
+        x_2 = Math.max((window_width - 50)/2 + 50, x_2);
         y_2 = Math.max(0, y_2);
 
         // dont let diagonals go fastter
