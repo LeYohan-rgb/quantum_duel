@@ -62,6 +62,14 @@
         x += dx * speed;
         y += dy * speed;
 
+        //AVOID PLAYER FROM GOING OFF BOUNDS
+        x = Math.min(x, 850);
+        y = Math.min(y, 800);
+
+        x = Math.max(0, x);
+        y = Math.max(0, y);
+
+
         plr1.style.left = x + 'px';
         plr1.style.top = y + 'px';
 
@@ -69,8 +77,8 @@
     }
 
     const plr2 = document.getElementById("player2");
-    let x_2 = 100;
-    let y_2 = 100;
+    let x_2 = 1800;
+    let y_2 = 800;
     const speed_2 = 15;
     const keys_2 = {};
 
@@ -98,6 +106,13 @@
         if (keys_2['arrowright']) {
             dx_2 += 1;
         }
+
+        //AVOID PLAYER FROM GOING OFF BOUNDS
+        x_2 = Math.min(x_2, 1800);
+        y_2 = Math.min(y_2, 800);
+
+        x_2 = Math.max(950, x_2);
+        y_2 = Math.max(0, y_2);
 
         // dont let diagonals go fastter
         const length_2 = Math.hypot(dx_2, dy_2);
