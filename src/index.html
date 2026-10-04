@@ -1,5 +1,6 @@
 <body>
   <div id="player1"></div>
+  <div id="player2"></div>
   <style>
     body { background: black; color: white; font-family: sans-serif; }
 
@@ -8,29 +9,58 @@
         height: 50px;
         background: red;
         position: absolute;
+        
     }
   </style>
   <script>
     const plr1 = document.getElementById("player1");
     let x = 100;
     let y = 100;
-    const speed = 50;
+    const speed = 15;
+    const keys = {};
 
     document.addEventListener("keydown", function(event) {
-        if (event.key == "w") {
-            y -= speed;
-        }
-        if (event.key == "s") {
-            y += speed;
-        }
-        if (event.key == "a") {
-            x -= speed;
-        }
-        if (event.key == 'd') {
-            x += speed;
-        }
-        plr1.style.left = x + "px";
-        plr1.style.top = y + "px";
+        keys[event.key.toLowerCase()] = true;
     })
+
+    document.addEventListener("keyup", function(event) {
+        keys[event.key.toLowerCase()] = false;
+    })
+
+    function gameLoop() {
+        let dx = 0;
+        let dy = 0;
+
+        if (keys['w']) {
+            dy -= 1;
+        }
+        if (keys['s']) {
+            dy += 1;
+        }
+        if (keys['a']) {
+            dx -= 1;
+        }
+        if (keys['d']) {
+            dx += 1;
+        }
+
+        // dont let diagonals go fastter
+        const length = Math.hypot(dx, dy);
+
+        if (length > 0) {
+            dx /= length;
+            dy /= length;
+        }
+
+        x += dx * speed;
+        y += dy * speed;
+
+        plr1.style.left = x + 'px';
+        plr1.style.top = y + 'px';
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
   </script>
 </body>
