@@ -40,6 +40,10 @@
 
     document.addEventListener("keydown", function(event) {
         keys[event.key.toLowerCase()] = true;
+
+        if (event.key.toLowerCase() == 'e') {
+            shootBullet(1);
+        }
     })
 
     document.addEventListener("keyup", function(event) {
@@ -76,9 +80,6 @@
             dx += 1;
         }
 
-        if (keys[['e']]) {
-            shootBullet(1);
-        }
 
         // dont let diagonals go faster
         const length = Math.hypot(dx, dy);
@@ -105,7 +106,12 @@
 
         //moving the bullets
         for (let bullet of bullets.children) {
-            bullet.style.left = (parseInt(bullet.style.left) + 10) + "px";
+            let bullet_x = parseInt(bullet.style.left) + 100;
+            bullet.style.left = bullet_x + "px";
+
+            if (bullet_x > window_width) {
+                bullet.remove();
+            }
         }
 
         requestAnimationFrame(gameLoop);
