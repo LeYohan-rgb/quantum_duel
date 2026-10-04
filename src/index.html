@@ -30,6 +30,7 @@
   <script>
     const window_height = window.innerHeight;
     const window_width = window.innerWidth;
+    const bullets = document.getElementById("bullets");
 
     const plr1 = document.getElementById("player1");
     let x = 100;
@@ -50,7 +51,12 @@
     function shootBullet(player) {
         let bullet = document.createElement("div");
         bullet.classList.add("bullet");
-        document.body.appendChild(bullet);
+
+        if (player == 1) {
+            bullet.style.left = x + 50 + "px";
+            bullet.style.top = y + 10 + "px";
+        }
+        bullets.appendChild(bullet);
     }
 
     function gameLoop() {
@@ -95,6 +101,12 @@
 
         plr1.style.left = x + 'px';
         plr1.style.top = y + 'px';
+
+
+        //moving the bullets
+        for (let bullet of bullets.children) {
+            bullet.style.left = (parseInt(bullet.style.left) + 10) + "px";
+        }
 
         requestAnimationFrame(gameLoop);
     }
