@@ -1,6 +1,7 @@
 <body>
   <div id="player1"></div>
   <div id="player2"></div>
+  <div id="bullets"></div>
   <style>
     body { background: black; color: white; font-family: sans-serif; }
 
@@ -16,6 +17,13 @@
         width: 50px;
         height: 50px;
         background: blue;
+        position: absolute;
+    }
+
+    .bullet {
+        width: 25px;
+        height: 25px;
+        background: white;
         position: absolute;
     }
   </style>
@@ -37,6 +45,14 @@
         keys[event.key.toLowerCase()] = false;
     })
 
+    // let's create the bullet
+
+    function shootBullet(player) {
+        let bullet = document.createElement("div");
+        bullet.classList.add("bullet");
+        document.body.appendChild(bullet);
+    }
+
     function gameLoop() {
         let dx = 0;
         let dy = 0;
@@ -54,7 +70,11 @@
             dx += 1;
         }
 
-        // dont let diagonals go fastter
+        if (keys[['e']]) {
+            shootBullet(1);
+        }
+
+        // dont let diagonals go faster
         const length = Math.hypot(dx, dy);
 
         if (length > 0) {
