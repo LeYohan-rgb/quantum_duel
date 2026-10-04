@@ -11,6 +11,13 @@
         position: absolute;
         
     }
+
+    #player2 {
+        width: 50px;
+        height: 50px;
+        background: blue;
+        position: absolute;
+    }
   </style>
   <script>
     const plr1 = document.getElementById("player1");
@@ -61,6 +68,55 @@
         requestAnimationFrame(gameLoop);
     }
 
+    const plr2 = document.getElementById("player2");
+    let x_2 = 100;
+    let y_2 = 100;
+    const speed_2 = 15;
+    const keys_2 = {};
+
+    document.addEventListener("keydown", function(event) {
+        keys_2[event.key.toLowerCase()] = true;
+    })
+
+    document.addEventListener("keyup", function(event) {
+        keys_2[event.key.toLowerCase()] = false;
+    })
+
+    function gameLoop2() {
+        let dx_2 = 0;
+        let dy_2 = 0;
+
+        if (keys_2['arrowup']) {
+            dy_2 -= 1;
+        }
+        if (keys_2['arrowdown']) {
+            dy_2 += 1;
+        }
+        if (keys_2['arrowleft']) {
+            dx_2 -= 1;
+        }
+        if (keys_2['arrowright']) {
+            dx_2 += 1;
+        }
+
+        // dont let diagonals go fastter
+        const length_2 = Math.hypot(dx_2, dy_2);
+
+        if (length_2 > 0) {
+            dx_2 /= length_2;
+            dy_2 /= length_2;
+        }
+
+        x_2 += dx_2 * speed_2;
+        y_2 += dy_2 * speed_2;
+
+        plr2.style.left = x_2 + 'px';
+        plr2.style.top = y_2 + 'px';
+
+        requestAnimationFrame(gameLoop2);
+    }
+
     gameLoop();
+    gameLoop2();
   </script>
 </body>
