@@ -3,8 +3,16 @@
   <div id="player2"></div>
   <div id="bullets"></div>
   <div id="bullets2"></div>
+  <div id="wall"></div>
   <style>
     body { background: black; color: white; font-family: sans-serif; }
+
+    #wall {
+        width: 25px;
+        height: 100%;
+        background: white;
+        position: absolute;
+    }
 
     #player1 {
         width : 50px;
@@ -24,7 +32,7 @@
     .bullet {
         width: 25px;
         height: 25px;
-        background: white;
+        background: rgb(253, 255, 193);
         position: absolute;
     }
   </style>
@@ -33,6 +41,10 @@
     const window_width = window.innerWidth;
     const bullets = document.getElementById("bullets");
     const bullets_2 = document.getElementById("bullets2");
+
+    //position wall
+    const wall = document.getElementById("wall");
+    wall.style.left = (window_width - 50)/2 + 'px';
 
     const plr1 = document.getElementById("player1");
     let x = 100;
