@@ -2,6 +2,7 @@
   <div id="player1"></div>
   <div id="player2"></div>
   <div id="bullets"></div>
+  <div id="bullets2"></div>
   <style>
     body { background: black; color: white; font-family: sans-serif; }
 
@@ -31,6 +32,7 @@
     const window_height = window.innerHeight;
     const window_width = window.innerWidth;
     const bullets = document.getElementById("bullets");
+    const bullets_2 = document.getElementById("bullets2");
 
     const plr1 = document.getElementById("player1");
     let x = 100;
@@ -43,6 +45,9 @@
 
         if (event.key.toLowerCase() == 'e') {
             shootBullet(1);
+        }
+        if (event.code == 'ShiftRight') {
+            shootBullet(2);
         }
     })
 
@@ -59,8 +64,13 @@
         if (player == 1) {
             bullet.style.left = x + 50 + "px";
             bullet.style.top = y + 10 + "px";
+            bullets.appendChild(bullet);
         }
-        bullets.appendChild(bullet);
+        if (player == 2) {
+            bullet.style.left = x_2 - 50 + "px";
+            bullet.style.top = y_2 + 10 + "px";
+            bullets_2.appendChild(bullet);
+        }
     }
 
     function gameLoop() {
@@ -106,9 +116,23 @@
 
         //moving the bullets
         for (let bullet of bullets.children) {
-            let bullet_x = parseInt(bullet.style.left) + 100;
+            let bullet_x = parseInt(bullet.style.left) + 60;
             bullet.style.left = bullet_x + "px";
 
+            //check collision!
+            let bulletRect = bullet.getBoundingClientRect();
+            let plr_2_rect = plr2.getBoundingClientRect();
+
+            if (
+                bulletRect.left < plr_2_rect.right &&
+                bulletRect.right > plr_2_rect.left &&
+                bulletRect.top < plr_2_rect.bottom &&
+                bulletRect.bottom > plr_2_rect.top
+            ) {
+                bullet.remove();
+            }
+
+            //BULLET WENT OFF BOUNDS
             if (bullet_x > window_width) {
                 bullet.remove();
             }
@@ -168,6 +192,30 @@
 
         plr2.style.left = x_2 + 'px';
         plr2.style.top = y_2 + 'px';
+
+        //moving the bullets for 2nd player
+        for (let bullet of bullets_2.children) {
+            let bullet_x = parseInt(bullet.style.left) - 60;
+            bullet.style.left = bullet_x + "px";
+
+            //check collision!
+            let bulletRect = bullet.getBoundingClientRect();
+            let plr_1_rect = plr1.getBoundingClientRect();
+
+            if (
+                bulletRect.left < plr_1_rect.right &&
+                bulletRect.right > plr_1_rect.left &&
+                bulletRect.top < plr_1_rect.bottom &&
+                bulletRect.bottom > plr_1_rect.top
+            ) {
+                bullet.remove();
+            }
+
+            // bullet went off bounds
+            if (bullet_x < 0) {
+                bullet.remove();
+            }
+        }
 
         requestAnimationFrame(gameLoop2);
     }
