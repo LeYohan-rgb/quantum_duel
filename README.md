@@ -1,7 +1,7 @@
 # Quantum Duel
 
 This web game is a local two-player battle game where you have the ability to shoot an infinite amount of bullets at your opponent, and the first one to take the other down wins!
-It was deliberately made to be under 3kb.
+It was deliberately made to be under 3kb, as part of the program [Shrink](https://shrink.hackclub.com/) by Hack Club. 
 
 ## Inspiration
 
@@ -10,7 +10,7 @@ Sadly, I couldn't include all of this without making the game way over 3kb.
 
 # Features
 <img width="1252" height="466" alt="image" src="https://github.com/user-attachments/assets/4c423ae6-77c8-48d6-88ff-873556d475d0" />
-<br>
+<br><br>
 -<b>Eight-directional movement</b><br>
 -<b>Bullet generator</b><br>
 -<b>Health bar</b><br>
@@ -51,7 +51,7 @@ which felt very rewarding.
 3- Open the folder and go to `src`.<br>
 4- Open the `index` file with your browser, and done!<br>
 
-Alternately, if you want to run this directly on your browser, then:<br><br>
+Alternately, if you want to run this by pasting the code directly on your browser, then:<br>
 
 1- Go to the `dist` folder in the repository.<br>
 2- Go to `uri.txt`.<br>
