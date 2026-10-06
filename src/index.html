@@ -1,4 +1,4 @@
-<body>
+<body tabindex="0">
   <div id="player1"></div>
   <div id="player2"></div>
   <div id="bullets"></div>
@@ -50,6 +50,7 @@
     }
   </style>
   <script>
+    document.body.focus();
     const window_height = window.innerHeight;
     const window_width = window.innerWidth;
     const bullets = document.getElementById("bullets");
@@ -68,11 +69,18 @@
     let y = 100;
     const speed = 15;
     const keys = {};
+    const keys_2 = {};
 
-    document.addEventListener("keydown", function(event) {
-        keys[event.key.toLowerCase()] = true;
+    window.addEventListener("keydown", function(event) {
+        event.preventDefault(); // no annoying searchbar interruptions
 
-        if (event.key.toLowerCase() == 'e') {
+        const key = event.key.toLowerCase();
+
+        keys[key] = true;
+        keys_2[key] = true;
+
+
+        if (key == 'e') {
             shootBullet(1);
         }
         if (event.code == 'ControlRight') {
@@ -80,21 +88,26 @@
         }
     })
 
-    document.addEventListener("keyup", function(event) {
-        keys[event.key.toLowerCase()] = false;
+    window.addEventListener("keyup", function(event) {
+        event.preventDefault();
+
+        const key = event.key.toLowerCase();
+
+        keys[key] = false;
+        keys_2[key] = false;
     })
 
     // let's create the bullet
 
     function bulletHit(player) {
         if (player == 1) {
-            health1 -= 1;
-            health_1.textContent = `Health: ${health1}`;
+            health2 -= 1;
+            health_2.textContent = `Health: ${health2}`;
         }
 
         if (player == 2) {
-            health2 -= 1;
-            health_2.textContent = `Health: ${health2}`;
+            health1 -= 1;
+            health_1.textContent = `Health: ${health1}`;
         }
     }
 
@@ -187,15 +200,7 @@
     let x_2 = 1800;
     let y_2 = 800;
     const speed_2 = 15;
-    const keys_2 = {};
 
-    document.addEventListener("keydown", function(event) {
-        keys_2[event.key.toLowerCase()] = true;
-    })
-
-    document.addEventListener("keyup", function(event) {
-        keys_2[event.key.toLowerCase()] = false;
-    })
 
     function gameLoop2() {
         let dx_2 = 0;
