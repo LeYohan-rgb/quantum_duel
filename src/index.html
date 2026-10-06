@@ -4,8 +4,21 @@
   <div id="bullets"></div>
   <div id="bullets2"></div>
   <div id="wall"></div>
+    <h2 id = "health1">Health: 10</h2><h2 id = "health2">Health: 10</h2>
+
   <style>
     body { background: black; color: white; font-family: sans-serif; }
+
+    #health1 {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+    }
+    #health2 {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+    }
 
     #wall {
         width: 25px;
@@ -41,6 +54,7 @@
     const window_width = window.innerWidth;
     const bullets = document.getElementById("bullets");
     const bullets_2 = document.getElementById("bullets2");
+    const health_1 = document.getElementById("health1");
 
     //position wall
     const wall = document.getElementById("wall");
@@ -58,7 +72,7 @@
         if (event.key.toLowerCase() == 'e') {
             shootBullet(1);
         }
-        if (event.code == 'ShiftRight') {
+        if (event.code == 'ControlRight') {
             shootBullet(2);
         }
     })
